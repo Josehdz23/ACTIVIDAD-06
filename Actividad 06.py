@@ -50,3 +50,22 @@ def ingreso_Productos():
                         print(f"Ocurrió un error: {ex3}")
         except Exception as ex:
             print(f"\nHa ocurrido un error: {ex}")
+def menu():
+    print("\n- - - - INVENTARIO - - - -\n1. Agregar productos\n2. Buscar producto (por codigo)\n3. Valor total del inventario\n4. Mostrar total de productos en tienda\n5. Salir")
+
+def main():
+    while True:
+        try:
+            menu()
+            opcion = int(input("Seleccione una opción: "))
+            match opcion:
+                case 1:
+                    ingreso_Productos()
+                case 5:
+                    print("\nSaliendo...")
+                    break
+                case _:
+                    print("Esa opcion no existe, reintente")
+        except Exception as ex:
+            print(f"\nHa ocurrido un error: {ex}")
+main()
