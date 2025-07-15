@@ -3,63 +3,77 @@ def ingreso_Productos():
     while True:
         try:
             cantidad = int(input("\nIngrese la cantidad de productos que desea ingresar: "))
-            for i in range(cantidad):
-                while True:
-                    try:
-                        codigo = int(input("\nIngrese el codigo del producto: "))
-                        if codigo > 0:
+            if cantidad > 0:
+                for i in range(cantidad):
+                    while True:
+                        try:
+                            codigo = int(input("\nIngrese el codigo del producto: "))
+                            if codigo > 0:
+                                if codigo in Productos.keys():
+                                    print("\nEste codigo ya existe, reintente")
+                                else:
+                                    break
+                            else:
+                                print("\nEl codigo del producto no es valido, reintente")
+                        except Exception as e:
+                            print(f"Ha ocurrido un error: {e}")
+                    while True:
+                        nombre = input("Ingrese el nombre del producto: ")
+                        if nombre or nombre.isspace():
                             break
                         else:
-                            print("\nEl codigo del producto no es valido")
-                    except Exception as e:
-                        print(f"Ha ocurrido un error: {e}")
-                while True:
-                    nombre = input("Ingrese el nombre del producto: ")
-                    if nombre or nombre.isspace():
-                        break
-                    else:
-                        print("\nEl nombre del producto no es valido")
-                while True:
-                    categoria = input("Ingrese la categoria del producto: ")
-                    if categoria or categoria.isspace():
-                        break
-                    else:
-                        print("\nLa categoria del producto no es valida")
-                while True:
-                    talla = input("Ingrese la talla del producto (S,M,L,XL): ")
-                    if talla or talla.isspace():
-                        break
-                    else:
-                        print("\nLa talla del producto no es valida")
-                b = 0
-                while b == 0:
-                    try:
-                        precio = float(input("Ingrese el precio del producto: "))
-                        if precio > 0:
-                            b = 1
+                            print("\nEl nombre del producto no es valido, reintente")
+                    while True:
+                        categoria = input("Ingrese la categoria del producto(Hombre,Mujer,Niño): ")
+                        if categoria or categoria.isspace():
+                            categoria = categoria.upper()
+                            if (categoria == "HOMBRE" or categoria == "MUJER" or categoria == "NIÑO"):
+                                break
+                            else:
+                                print("\nLa categoria del producto no es valida, reintente")
                         else:
-                            print("\nEl precio del producto no es valido")
-                    except Exception as ex2:
-                        print(f"Ocurrió un error: {ex2}")
-                b = 0
-                while b == 0:
-                    try:
-                        stock = int(input("Ingrese el stock del producto en tienda: "))
-                        if stock > 0:
-                            b = 1
+                            print("\nLa categoria del producto no es valida, reintente")
+                    while True:
+                        talla = input("Ingrese la talla del producto (S,M,L,XL): ")
+                        if talla or talla.isspace():
+                            talla = talla.upper()
+                            if (talla == "S" or talla == "M" or talla == "L" or talla == "XL"):
+                                break
+                            else:
+                                print("\nLa talla del producto no es valida, reintente")
                         else:
-                            print("\nEl stock del producto no es valido")
-                    except Exception as ex3:
-                        print(f"Ocurrió un error: {ex3}")
-                Productos[codigo] = {
-                    "Nombre": nombre,
-                    "Categoria": categoria,
-                    "Talla": talla,
-                    "Precio": precio,
-                    "Stock": stock,
-                }
-                print("Se ha guardado el producto")
-            break
+                            print("\nLa talla del producto no es valida, reintente")
+                    b = 0
+                    while b == 0:
+                        try:
+                            precio = float(input("Ingrese el precio del producto: "))
+                            if precio > 0:
+                                b = 1
+                            else:
+                                print("\nEl precio del producto no es valido, reintente")
+                        except Exception as ex2:
+                            print(f"Ocurrió un error: {ex2}")
+                    b = 0
+                    while b == 0:
+                        try:
+                            stock = int(input("Ingrese el stock del producto en tienda: "))
+                            if stock > 0:
+                                b = 1
+                            else:
+                                print("\nEl stock del producto no es valido, reintente")
+                        except Exception as ex3:
+                            print(f"Ocurrió un error: {ex3}")
+                    Productos[codigo] = {
+                        "Nombre": nombre,
+                        "Categoria": categoria,
+                        "Talla": talla,
+                        "Precio": precio,
+                        "Stock": stock,
+                    }
+                    print("Se ha guardado el producto")
+                break
+            else:
+                print("Dato invalido, reintente")
         except Exception as ex:
             print(f"\nHa ocurrido un error: {ex}")
 def menu():
